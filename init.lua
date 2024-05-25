@@ -15,15 +15,12 @@ require 'azee.autocommands'
 require 'azee.package-manager'
 
 -- [[ Configure and install plugins ]]
---
 --  To check the current status of your plugins, run
 --    :Lazy
---
 --  You can press `?` in this menu for help. Use `:q` to close the window
---
 --  To update plugins you can run
 --    :Lazy update
---
+
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   -- Use `opts = {}` to force a plugin to be loaded.
