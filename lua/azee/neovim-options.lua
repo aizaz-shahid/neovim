@@ -49,6 +49,11 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true -- convert tabs to spaces
+vim.opt.autoindent = true -- auto indentation
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -58,9 +63,29 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 8
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+vim.opt.termguicolors = true -- enable true color support
+
+-- Python Formatting
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.py',
+  callback = function()
+    vim.opt.textwidth = 79
+    vim.opt.colorcolumn = '79'
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  pattern = '*',
+  callback = function()
+    if vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
+      vim.cmd 'normal! g`"'
+    end
+  end,
+}) -- return to last edit position when opening files

@@ -7,12 +7,13 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
+
+    -- Telescope integration with dap
+    'nvim-telescope/telescope-dap.nvim',
 
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
@@ -48,14 +49,25 @@ return {
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-    vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
-    vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
-    vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+    vim.keymap.set('n', '<leader>db', dap.clear_breakpoints, { desc = 'Clear Breakpoints' })
+    vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.keymap.set('n', '<leader>dt', dap.terminate, { desc = 'Debug: Terminate' })
+    vim.keymap.set('n', '<leader>dd', function()
+      dap.disconnect()
+      dapui.close()
+    end, { desc = 'Degbugger: Disconnect' })
+    vim.keymap.set('n', '<leader>db', '<cmd>Telescope dap list_breakpoints<cr>')
+    vim.keymap.set('n', '<leader>df', '<cmd>Telescope dap frames<cr>')
+    vim.keymap.set('n', '<leader>dh', '<cmd>Telescope dap commands<cr>')
+    vim.keymap.set('n', '<leader>di', dap.step_into, { desc = 'Debug: Step Into' })
+    vim.keymap.set('n', '<leader>ds', dap.step_over, { desc = 'Debug: Step Over' })
+    vim.keymap.set('n', '<leader>do', dap.step_out, { desc = 'Debug: Step Out' })
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
+    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+    vim.keymap.set('n', '<leader>dl', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -78,9 +90,6 @@ return {
         },
       },
     }
-
-    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
