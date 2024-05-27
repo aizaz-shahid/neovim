@@ -64,5 +64,11 @@ vim.keymap.set('n', '<leader>tm', function()
   end
 end, { desc = 'Run Method Test' })
 
+-- vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+-- vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
+
 -- nvim-comment
 vim.keymap.set({ 'n', 'v' }, '<leader>/', ': CommentToggle<cr>')
+
+-- Database keymaps
+vim.keymap.set('n', '<leader>DB', ':DBUIToggle<CR>', { desc = 'Toggle Databases' })
