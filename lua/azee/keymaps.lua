@@ -40,6 +40,9 @@ vim.keymap.set('n', '<leader>qc', ':cclose<CR>', { desc = 'close quickfix list' 
 -- Delete but don't copy(send to void register instead)
 vim.keymap.set({ 'n', 'v' }, '<C-d>', [["_d]])
 
+-- Copy current file path to clipboard
+vim.keymap.set('n', '<leader>cp', ':let @+=expand("%:p")<CR>', { desc = 'Copy current file path to clipboard' })
+
 -- NOTE: Neogit Keymaps
 vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>gc', ':Neogit commit<CR>', { silent = true, noremap = true })

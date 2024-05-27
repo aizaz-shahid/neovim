@@ -62,7 +62,12 @@ return { -- LSP Configuration & Plugins
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
         -- Find references for the word under your cursor.
-        map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map('gr', function()
+          require('telescope.builtin').lsp_references {
+            fname_width = 100,
+            show_line = false,
+          }
+        end, '[G]oto [R]eferences')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
@@ -199,6 +204,7 @@ return { -- LSP Configuration & Plugins
       'stylua', -- Used to format Lua code
       'black',
       'isort',
+      'flake8',
       'pyright',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
