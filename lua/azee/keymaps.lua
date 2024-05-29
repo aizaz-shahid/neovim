@@ -1,7 +1,7 @@
 -- NOTE: Basic Keymaps
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('v', '<Tab>', '>gv')
-vim.keymap.set('v', '<S-Tab>', '<gv')
+vim.keymap.set({ 'n', 'v' }, '<Tab>', '>gv')
+vim.keymap.set({ 'n', 'v' }, '<S-Tab>', '<gv')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -49,22 +49,8 @@ vim.keymap.set('n', '<leader>gc', ':Neogit commit<CR>', { silent = true, noremap
 vim.keymap.set('n', '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { silent = true, noremap = true })
--- vim.keymap.set('n', '<leader>gB', ':G blame<CR>', { silent = true, noremap = true })
 
--- Python Testing
-vim.keymap.set('n', '<leader>tc', function()
-  if vim.bo.filetype == 'python' then
-    require('dap-python').test_class()
-  end
-end, { desc = 'Run Class Tests' })
-
-vim.keymap.set('n', '<leader>tm', function()
-  if vim.bo.filetype == 'python' then
-    require('dap-python').test_method()
-  end
-end, { desc = 'Run Method Test' })
-
--- vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+-- Code keymaps
 -- vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
 
 -- nvim-comment

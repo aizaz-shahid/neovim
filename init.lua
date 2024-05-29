@@ -7,6 +7,7 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+vim.g.lazyvim_python_lsp = 'pyright'
 
 require 'azee.neovim-options'
 require 'azee.neovim-commands'

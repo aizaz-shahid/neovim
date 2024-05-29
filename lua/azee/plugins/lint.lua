@@ -7,6 +7,12 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        python = { 'flake8' },
+        dockerfile = { 'hadolint' },
+        terraform = { 'tflint' },
+        json = { 'jsonlint' },
+        yaml = { 'yamllint' },
+        tf = { 'terraform_validate' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
