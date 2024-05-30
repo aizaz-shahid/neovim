@@ -12,7 +12,7 @@ return {
         terraform = { 'tflint' },
         json = { 'jsonlint' },
         yaml = { 'yamllint' },
-        tf = { 'terraform_validate' },
+        tf = { 'tflint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

@@ -1,7 +1,14 @@
--- NOTE: Basic Keymaps
+-- Utility Keymaps
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set({ 'n', 'v' }, '<Tab>', '>gv')
-vim.keymap.set({ 'n', 'v' }, '<S-Tab>', '<gv')
+vim.keymap.set({ 'n', 'v' }, '<leader>/', ': CommentToggle<cr>', { desc = 'Toggle Comment' })
+
+-- Indent with Tab in normal mode
+vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', '<<', { noremap = true })
+
+-- Indent with Tab in visual mode
+vim.api.nvim_set_keymap('v', '<Tab>', '>gv', { noremap = true })
+vim.api.nvim_set_keymap('v', '<S-Tab>', '<gv', { noremap = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -26,8 +33,8 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Move highlighted text
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
+vim.api.nvim_set_keymap('x', 'J', ":move '>+1<CR>gv=gv", { noremap = true })
+vim.api.nvim_set_keymap('x', 'K', ":move '<-2<CR>gv=gv", { noremap = true })
 
 -- Quickfix keymaps
 vim.keymap.set('n', '<leader>qo', ':copen<CR>', { desc = 'Open quickfix list' })
@@ -37,24 +44,20 @@ vim.keymap.set('n', '<leader>qp', ':cprev<CR>', { desc = 'jump to prev quickfix 
 vim.keymap.set('n', '<leader>ql', ':clast<CR>', { desc = 'jump to last quickfix list item' })
 vim.keymap.set('n', '<leader>qc', ':cclose<CR>', { desc = 'close quickfix list' })
 
--- Delete but don't copy(send to void register instead)
-vim.keymap.set({ 'n', 'v' }, '<C-d>', [["_d]])
-
--- Copy current file path to clipboard
+-- Copy Paste Keymaps
+vim.keymap.set('v', 'x', '"+d', { desc = 'Cut' })
+vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { desc = 'Copy', noremap = true })
 vim.keymap.set('n', '<leader>cp', ':let @+=expand("%:p")<CR>', { desc = 'Copy current file path to clipboard' })
 
--- NOTE: Neogit Keymaps
-vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>gc', ':Neogit commit<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { silent = true, noremap = true })
+-- Git Keymaps
+vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { desc = 'Git Status', silent = true, noremap = true })
+-- vim.keymap.set('n', '<leader>gc', ':Neogit commit<CR>', { silent = true, noremap = true })
+-- vim.keymap.set('n', '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true })
+-- vim.keymap.set('n', '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { desc = 'Git Branches', silent = true, noremap = true })
 
--- Code keymaps
--- vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
+-- Debugging and Testing Keymaps
+vim.keymap.set('n', '<leader>db', ':DBUIToggle<CR>', { desc = 'Toggle Databases' })
+--l vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
 
--- nvim-comment
-vim.keymap.set({ 'n', 'v' }, '<leader>/', ': CommentToggle<cr>')
-
--- Database keymaps
-vim.keymap.set('n', '<leader>DB', ':DBUIToggle<CR>', { desc = 'Toggle Databases' })
+-- Harpoon Keymaps

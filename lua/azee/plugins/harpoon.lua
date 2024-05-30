@@ -35,11 +35,11 @@ return {
     end, { desc = 'Select Amazing item 4' })
 
     -- Toggle previous & next buffers stored within Amazing list
-    vim.keymap.set('n', '<leader>ah', function()
+    vim.keymap.set('n', '<leader>[', function()
       harpoon:list():prev()
     end, { desc = 'Select previous Amazing item' })
 
-    vim.keymap.set('n', '<leader>al', function()
+    vim.keymap.set('n', '<leader>]', function()
       harpoon:list():next()
     end, { desc = 'Select next Amazing item' })
   end,

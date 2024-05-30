@@ -26,6 +26,7 @@ return { -- Autoformat
       terraform = { 'terraform_fmt' },
       tf = { 'terraform_fmt' },
       ['terraform-vars'] = { 'terraform_fmt' },
+      yaml = { 'yamllint', 'yamlfmt' },
     },
   },
 }

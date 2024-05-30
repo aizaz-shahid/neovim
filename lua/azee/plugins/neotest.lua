@@ -13,53 +13,53 @@ return {
     },
     keys = {
       {
-        '<leader>Tr',
+        '<leader>tr',
         function()
           require('neotest').run.run()
         end,
-        desc = 'Run Nearest',
+        desc = 'Run Nearest Test',
       },
       {
-        '<leader>Td',
+        '<leader>td',
         function()
           require('neotest').run.run { strategy = 'dap' }
         end,
-        desc = 'Debug Nearest',
+        desc = 'Debug Nearest Test',
       },
       {
-        '<leader>Tf',
+        '<leader>tf',
         function()
           require('neotest').run.run(vim.fn.expand '%')
         end,
         desc = 'Run current File',
       },
       {
-        '<leader>Ts',
+        '<leader>ts',
         function()
           require('neotest').summary.toggle()
         end,
-        desc = 'Toggle Summary',
+        desc = 'Toggle Tests Summary',
       },
       {
-        '<leader>To',
+        '<leader>tO',
         function()
           require('neotest').output.open { enter = true, auto_close = true }
         end,
         desc = 'Show Output',
       },
       {
-        '<leader>TO',
+        '<leader>to',
         function()
           require('neotest').output_panel.toggle()
         end,
         desc = 'Toggle Output Panel',
       },
       {
-        '<leader>Tl',
+        '<leader>tl',
         function()
           require('neotest').run.run_last()
         end,
-        desc = 'Run Last',
+        desc = 'Run Last Test',
       },
     },
     config = function()
