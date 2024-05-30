@@ -46,6 +46,7 @@ vim.keymap.set('n', '<leader>qc', ':cclose<CR>', { desc = 'close quickfix list' 
 
 -- Copy Paste Keymaps
 vim.keymap.set('v', 'x', '"+d', { desc = 'Cut' })
+vim.keymap.set('n', 'X', '"+dd', { desc = 'Cut line' })
 vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { desc = 'Copy', noremap = true })
 vim.keymap.set('n', '<leader>cp', ':let @+=expand("%:p")<CR>', { desc = 'Copy current file path to clipboard' })
 
