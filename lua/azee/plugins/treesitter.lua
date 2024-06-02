@@ -27,6 +27,7 @@ return {
       'javascript',
       'bash',
       'terraform',
+      'markdown',
     },
   },
   config = function(_, opts)

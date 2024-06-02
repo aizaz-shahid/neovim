@@ -1,6 +1,6 @@
 -- Utility Keymaps
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set({ 'n', 'v' }, '<leader>/', ': CommentToggle<cr>', { desc = 'Toggle Comment' })
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>/', ': CommentToggle<cr>', { desc = 'Toggle Comment' })
 
 -- Indent with Tab in normal mode
 vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap = true })
@@ -49,6 +49,7 @@ vim.keymap.set('v', 'x', '"+d', { desc = 'Cut' })
 vim.keymap.set('n', 'X', '"+dd', { desc = 'Cut line' })
 vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { desc = 'Copy', noremap = true })
 vim.keymap.set('n', '<leader>cp', ':let @+=expand("%:p")<CR>', { desc = 'Copy current file path to clipboard' })
+vim.keymap.set({ 'n', 'v' }, 'p', '"+p', { desc = 'Paste', noremap = true })
 
 -- Git Keymaps
 vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { desc = 'Git Status', silent = true, noremap = true })
@@ -57,8 +58,11 @@ vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { desc = 'Git Status', silent =
 -- vim.keymap.set('n', '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { desc = 'Git Branches', silent = true, noremap = true })
 
--- Debugging and Testing Keymaps
+-- Database Keymap
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<CR>', { desc = 'Toggle Databases' })
---l vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
 
--- Harpoon Keymaps
+-- Scroll Keymaps
+vim.keymap.set('n', 'L', '5zl', { desc = 'Scroll right' })
+vim.keymap.set('n', 'H', '5zh', { desc = 'Scroll left' })
+vim.keymap.set('n', '<C-k>', '5<C-y>', { desc = 'Scroll up' })
+vim.keymap.set('n', '<C-j>', '5<C-e>', { desc = 'Scroll down' })

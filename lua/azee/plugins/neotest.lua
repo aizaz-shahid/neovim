@@ -6,6 +6,7 @@ return {
     'nvim-neotest/neotest',
     -- optional = true,
     dependencies = {
+      'mfussenegger/nvim-dap',
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
