@@ -34,6 +34,13 @@ return {
       end,
       desc = 'Open File Explorer',
     },
+    {
+      '<Esc>',
+      function()
+        require('mini.files').close()
+      end,
+      desc = 'Close File Explorer',
+    },
     -- {
     --   "<leader>fM",
     --   function()

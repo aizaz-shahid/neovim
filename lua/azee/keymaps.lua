@@ -64,5 +64,20 @@ vim.keymap.set('n', '<leader>db', ':DBUIToggle<CR>', { desc = 'Toggle Databases'
 -- Scroll Keymaps
 vim.keymap.set('n', 'L', '5zl', { desc = 'Scroll right' })
 vim.keymap.set('n', 'H', '5zh', { desc = 'Scroll left' })
-vim.keymap.set('n', '<C-k>', '5<C-y>', { desc = 'Scroll up' })
-vim.keymap.set('n', '<C-j>', '5<C-e>', { desc = 'Scroll down' })
+-- vim.keymap.set('n', '<C-k>', '<C-y>', { desc = 'Scroll up' })
+-- vim.keymap.set('n', '<C-j>', '<C-e>', { desc = 'Scroll down' })
+
+-- Jumplist Keymaps
+vim.keymap.set('n', '<leader>sj', function()
+  require('telescope.builtin').jumplist {}
+end, { desc = 'Jumplist' })
+
+-- Macros Keymaps
+vim.keymap.set('n', 'Q', '@qj', { desc = 'Run macro' })
+vim.keymap.set('x', 'Q', ':normal @q<CR>', { desc = 'Run macro' })
+
+-- Debug Keymaps
+vim.api.nvim_set_keymap('n', '<leader>tb', ':lua require("dap").toggle_breakpoint()<CR>', { silent = true, noremap = true, desc = 'Toggle Breakpoint' })
+vim.api.nvim_set_keymap('n', '<leader>dm', ':lua require("dap-python").test_method()<CR>', { silent = true, noremap = true, desc = 'Debug Method' })
+vim.api.nvim_set_keymap('n', '<leader>dC', ':lua require("dap-python").test_class()<CR>', { silent = true, noremap = true, desc = 'Debug Class' })
+vim.api.nvim_set_keymap('v', '<leader>ds', '<ESC>:lua require("dap-python").debug_selection()<CR>', { silent = true, noremap = true, desc = 'Debug Selection' })

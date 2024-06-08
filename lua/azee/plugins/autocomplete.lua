@@ -1,6 +1,7 @@
 return {
   {
     'github/copilot.vim',
+    event = 'InsertEnter',
   },
   {
     'hrsh7th/nvim-cmp',
@@ -10,7 +11,6 @@ return {
       'hrsh7th/cmp-path',
       {
         'L3MON4D3/LuaSnip',
-        tag = 'v2.*',
         dependencies = {
           {
             'rafamadriz/friendly-snippets',
@@ -41,6 +41,12 @@ return {
           ['<C-y>'] = cmp.mapping.confirm { select = true },
         },
       }
+      cmp.setup.filetype({ 'sql' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+        },
+      })
     end,
   },
 }

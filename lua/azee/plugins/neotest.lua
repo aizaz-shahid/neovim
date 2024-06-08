@@ -1,6 +1,7 @@
 return {
   {
     'nvim-neotest/neotest-python',
+    lazy = true,
   },
   {
     'nvim-neotest/neotest',
@@ -35,6 +36,34 @@ return {
         desc = 'Run current File',
       },
       {
+        '<leader>ta',
+        function()
+          local function trim_path_to_directory(directory_name)
+            local current_file_path = vim.api.nvim_buf_get_name(0)
+            local path_components = {}
+            for component in string.gmatch(current_file_path, '[^/]+') do
+              table.insert(path_components, component)
+            end
+
+            local trimmed_path = ''
+            for i, component in ipairs(path_components) do
+              trimmed_path = trimmed_path .. '/' .. component
+              if component == directory_name then
+                break
+              end
+            end
+
+            return trimmed_path
+          end
+
+          local dir = vim.fn.input 'Enter parent directory: '
+          require('neotest').run.run(trim_path_to_directory(dir))
+          print(dir)
+          -- require('neotest').run.run(vim.uv.cwd())
+        end,
+        desc = 'Run All Test Files',
+      },
+      {
         '<leader>ts',
         function()
           require('neotest').summary.toggle()
@@ -42,14 +71,14 @@ return {
         desc = 'Toggle Tests Summary',
       },
       {
-        '<leader>tO',
+        '<leader>to',
         function()
           require('neotest').output.open { enter = true, auto_close = true }
         end,
         desc = 'Show Output',
       },
       {
-        '<leader>to',
+        '<leader>tO',
         function()
           require('neotest').output_panel.toggle()
         end,
@@ -61,6 +90,13 @@ return {
           require('neotest').run.run_last()
         end,
         desc = 'Run Last Test',
+      },
+      {
+        '<leader>tS',
+        function()
+          require('neotest').run.stop()
+        end,
+        desc = 'Stop',
       },
     },
     config = function()
@@ -76,6 +112,7 @@ return {
         },
       }
       require('neodev').setup {
+        ft = { 'lua', 'vim' },
         library = { plugins = { 'neotest' }, types = true },
       }
     end,

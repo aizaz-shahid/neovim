@@ -2,7 +2,7 @@
 return {
   -- https://github.com/utilyre/barbecue.nvim
   'utilyre/barbecue.nvim',
-  event = { 'BufEnter', 'BufNewFile', 'BufReadPre' },
+  event = { 'BufNewFile', 'BufReadPre' },
   name = 'barbecue',
   version = '*',
   dependencies = {

@@ -1,6 +1,7 @@
 return { -- Autoformat
   'stevearc/conform.nvim',
-  lazy = false,
+  event = { 'BufWritePre' },
+  cmd = { 'ConformInfo', 'FormatToggle', 'FormatEnable', 'FormatDisable' },
   keys = {
     {
       '<leader>f',
@@ -26,7 +27,7 @@ return { -- Autoformat
       terraform = { 'terraform_fmt' },
       tf = { 'terraform_fmt' },
       ['terraform-vars'] = { 'terraform_fmt' },
-      yaml = { 'yamllint', 'yamlfmt' },
+      -- yaml = { 'yamllint', 'yamlfmt' },
     },
   },
 }
