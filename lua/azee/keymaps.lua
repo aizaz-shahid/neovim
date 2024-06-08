@@ -81,3 +81,6 @@ vim.api.nvim_set_keymap('n', '<leader>tb', ':lua require("dap").toggle_breakpoin
 vim.api.nvim_set_keymap('n', '<leader>dm', ':lua require("dap-python").test_method()<CR>', { silent = true, noremap = true, desc = 'Debug Method' })
 vim.api.nvim_set_keymap('n', '<leader>dC', ':lua require("dap-python").test_class()<CR>', { silent = true, noremap = true, desc = 'Debug Class' })
 vim.api.nvim_set_keymap('v', '<leader>ds', '<ESC>:lua require("dap-python").debug_selection()<CR>', { silent = true, noremap = true, desc = 'Debug Selection' })
+
+-- Undotree Keymaps
+vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)

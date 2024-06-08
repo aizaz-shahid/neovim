@@ -5,10 +5,11 @@ return {
   },
   {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    event = 'BufReadPost',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
       {
         'L3MON4D3/LuaSnip',
         dependencies = {
@@ -28,6 +29,7 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'path' },
+          { name = 'buffer' },
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
         snippet = {
@@ -46,6 +48,28 @@ return {
           { name = 'vim-dadbod-completion' },
           { name = 'buffer' },
         },
+      })
+
+      -- `/` cmdline setup.
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+      -- `:` cmdline setup.
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
       })
     end,
   },
