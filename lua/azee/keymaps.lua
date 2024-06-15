@@ -45,6 +45,7 @@ vim.keymap.set('n', '<leader>ql', ':clast<CR>', { desc = 'jump to last quickfix 
 vim.keymap.set('n', '<leader>qc', ':cclose<CR>', { desc = 'close quickfix list' })
 
 -- Copy Paste Keymaps
+vim.keymap.set('n', '<C-a>', 'ggVG', { desc = 'Select All' })
 vim.keymap.set('v', 'x', '"+d', { desc = 'Cut' })
 vim.keymap.set('n', 'X', '"+dd', { desc = 'Cut line' })
 vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { desc = 'Copy', noremap = true })
@@ -84,3 +85,7 @@ vim.api.nvim_set_keymap('v', '<leader>ds', '<ESC>:lua require("dap-python").debu
 
 -- Undotree Keymaps
 vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)
+
+-- Bufferline Keymaps
+vim.keymap.set('n', '[b', ':BufferLineCyclePrev<CR>', { silent = true, desc = 'Previous Buffer' })
+vim.keymap.set('n', ']b', ':BufferLineCycleNext<CR>', { silent = true, desc = 'Next Buffer' })

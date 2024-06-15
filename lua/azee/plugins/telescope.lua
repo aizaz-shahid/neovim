@@ -4,7 +4,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope-frecency.nvim',
+    -- 'nvim-telescope/telescope-frecency.nvim',
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
       'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -61,37 +61,37 @@ return { -- Fuzzy Finder (files, lsp, etc)
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
-        frecency = {
-          auto_validate = false,
-          matcher = 'fuzzy',
-          path_display = { 'filename_first' },
-          workspaces = {
-            ['sas'] = '/Users/aizazshahid/Flexciton/dev/platform/schedule_analyser_service/src',
-            ['platform'] = '/Users/aizazshahid/Flexciton/dev/platform/platform/src',
-            ['config'] = '/Users/aizazshahid/Flexciton/dev/platform/config',
-            ['helm'] = '/Users/aizazshahid/Flexciton/dev/platform/helm',
-            ['platform_tests'] = '/Users/aizazshahid/Flexciton/dev/platform/platform/test',
-            ['sas_tests'] = '/Users/aizazshahid/Flexciton/dev/platform/schedule_analyser_service/test',
-          },
-        },
+        -- frecency = {
+        --   auto_validate = false,
+        --   matcher = 'fuzzy',
+        --   path_display = { 'filename_first' },
+        --   workspaces = {
+        --     ['sas'] = '/Users/aizazshahid/Flexciton/dev/platform/schedule_analyser_service/src',
+        --     ['platform'] = '/Users/aizazshahid/Flexciton/dev/platform/platform/src',
+        --     ['config'] = '/Users/aizazshahid/Flexciton/dev/platform/config',
+        --     ['helm'] = '/Users/aizazshahid/Flexciton/dev/platform/helm',
+        --     ['platform_tests'] = '/Users/aizazshahid/Flexciton/dev/platform/platform/test',
+        --     ['sas_tests'] = '/Users/aizazshahid/Flexciton/dev/platform/schedule_analyser_service/test',
+        --   },
+        -- },
       },
     }
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension, 'frecency')
+    -- pcall(require('telescope').load_extension, 'frecency')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
-    -- vim.keymap.set('n', '<leader>ff', function()
-    --   builtin.find_files {
-    --     hidden = true,
-    --   }
-    -- end, { desc = 'Find Files' })
-    vim.keymap.set('n', '<leader>ff', '<Cmd>Telescope frecency<CR>', { desc = 'Find Files' })
+    vim.keymap.set('n', '<leader>ff', function()
+      builtin.find_files {
+        hidden = true,
+      }
+    end, { desc = 'Find Files' })
+    -- vim.keymap.set('n', '<leader>ff', '<Cmd>Telescope frecency<CR>', { desc = 'Find Files' })
     -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Find Select Telescope' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find Current Word' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
