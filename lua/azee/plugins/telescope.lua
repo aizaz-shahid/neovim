@@ -4,6 +4,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    {
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      -- This will not install any breaking changes.
+      -- For major updates, this must be adjusted manually.
+      version = '^1.0.0',
+    },
     -- 'nvim-telescope/telescope-frecency.nvim',
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -18,10 +24,62 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
+    {
+      'danielfalk/smart-open.nvim',
+      branch = '0.2.x',
+      dependencies = {
+        'kkharji/sqlite.lua',
+        'nvim-tree/nvim-web-devicons',
+        -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+        { 'nvim-telescope/telescope-fzy-native.nvim' },
+      },
+    },
     { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+  },
+  keys = {
+    {
+      '<leader>ff',
+      function()
+        require('telescope').extensions.live_grep_args.live_grep_args {
+          mappings = {
+            i = {
+              ['<C-t>'] = function()
+                local prompt_bufnr = vim.api.nvim_get_current_buf()
+                local prompt_text = vim.api.nvim_buf_get_lines(prompt_bufnr, 0, 1, false)[1]
+                vim.api.nvim_buf_set_text(prompt_bufnr, 0, #prompt_text, 0, #prompt_text, { ' -t' })
+                vim.api.nvim_win_set_cursor(0, { 1, #prompt_text + 3 })
+              end,
+              -- Add the filter out / exclude glob pattern
+              ['<C-x>'] = function()
+                local prompt_bufnr = vim.api.nvim_get_current_buf()
+                local prompt_text = vim.api.nvim_buf_get_lines(prompt_bufnr, 0, 1, false)[1]
+                vim.api.nvim_buf_set_text(prompt_bufnr, 0, #prompt_text, 0, #prompt_text, { ' -g!**' })
+                vim.api.nvim_win_set_cursor(0, { 1, #prompt_text + 5 })
+              end,
+              -- Add the filter / include only glob pattern
+              ['<C-i>'] = function()
+                local prompt_bufnr = vim.api.nvim_get_current_buf()
+                local prompt_text = vim.api.nvim_buf_get_lines(prompt_bufnr, 0, 1, false)[1]
+
+                vim.api.nvim_buf_set_text(prompt_bufnr, 0, #prompt_text, 0, #prompt_text, { ' -g**/*/**' })
+                vim.api.nvim_win_set_cursor(0, { 1, #prompt_text + 6 })
+              end,
+              ['<C-h>'] = function()
+                local prompt_bufnr = vim.api.nvim_get_current_buf()
+                local prompt_text = vim.api.nvim_buf_get_lines(prompt_bufnr, 0, 1, false)[1]
+                if not string.find(prompt_text, '--hidden') then
+                  vim.api.nvim_buf_set_text(prompt_bufnr, 0, #prompt_text, 0, #prompt_text, { ' --hidden' })
+                end
+              end,
+            },
+          },
+        }
+      end,
+      desc = 'Live Grep with Arguments',
+    },
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -81,24 +139,38 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     -- pcall(require('telescope').load_extension, 'frecency')
+    pcall(require('telescope').load_extension, 'live_grep_args')
+    pcall(require('telescope').load_extension, 'smart_open')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find Keymaps' })
-    vim.keymap.set('n', '<leader>ff', function()
-      builtin.find_files {
+    vim.keymap.set('n', '<leader><leader>', function()
+      require('telescope').extensions.smart_open.smart_open {
+        cwd_only = false,
         hidden = true,
+        filename_first = true,
+        show_scores = false,
+        match_algorithm = 'fzy',
+        disable_devicons = false,
+        open_buffer_indicators = { previous = '●', others = '⊙' },
       }
-    end, { desc = 'Find Files' })
+    end, { noremap = true, silent = true, desc = 'Find Files' })
+
+    -- vim.keymap.set('n', '<leader>ff', function()
+    --   builtin.find_files {
+    --     hidden = true,
+    --   }
+    -- end, { desc = 'Find Files' })
     -- vim.keymap.set('n', '<leader>ff', '<Cmd>Telescope frecency<CR>', { desc = 'Find Files' })
     -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Find Select Telescope' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find Current Word' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find by Grep' })
+    -- vim.keymap.set('n', '<leader>ff', builtin.live_grep, { desc = 'Find by Grep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>f/', function()

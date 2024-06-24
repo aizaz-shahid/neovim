@@ -104,7 +104,7 @@ return {
         adapters = {
           require 'neotest-python' {
             dap = { justMyCode = false },
-            args = { '--log-level', 'DEBUG' },
+            args = { '--log-level', 'DEBUG', '-vv' },
             runner = 'pytest',
             -- python = '/Users/aizazshahid/.pyenv/versions/3.11.0/bin/python3.11',
           },

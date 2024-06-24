@@ -1,5 +1,5 @@
 -- Utility Keymaps
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights', noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>/', ': CommentToggle<cr>', { desc = 'Toggle Comment' })
 
 -- Indent with Tab in normal mode
@@ -17,7 +17,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>qd', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -84,8 +84,8 @@ vim.api.nvim_set_keymap('n', '<leader>dC', ':lua require("dap-python").test_clas
 vim.api.nvim_set_keymap('v', '<leader>ds', '<ESC>:lua require("dap-python").debug_selection()<CR>', { silent = true, noremap = true, desc = 'Debug Selection' })
 
 -- Undotree Keymaps
-vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle, { desc = 'Toggle Undotree' })
 
 -- Bufferline Keymaps
-vim.keymap.set('n', '[b', ':BufferLineCyclePrev<CR>', { silent = true, desc = 'Previous Buffer' })
-vim.keymap.set('n', ']b', ':BufferLineCycleNext<CR>', { silent = true, desc = 'Next Buffer' })
+vim.keymap.set('n', '<C-[>', ':BufferLineCyclePrev<CR>', { silent = true, noremap = true, desc = 'Previous Buffer' })
+vim.keymap.set('n', '<C-]>', ':BufferLineCycleNext<CR>', { silent = true, desc = 'Next Buffer' })
