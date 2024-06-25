@@ -58,6 +58,9 @@ vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { desc = 'Git Status', silent =
 -- vim.keymap.set('n', '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true })
 -- vim.keymap.set('n', '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { desc = 'Git Branches', silent = true, noremap = true })
+# git-worktree keymaps
+vim.keymap.set('n', '<leader>gtl', ':lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', { desc = 'List Git Worktrees' })
+vim.keymap.set('n', '<leader>gtc', ':lua require("telescope").extensions.git_worktree.create_git_worktree()<CR>', { desc = 'Create Git Worktree' })
 
 -- Database Keymap
 vim.keymap.set('n', '<leader>db', ':DBUIToggle<CR>', { desc = 'Toggle Databases' })
@@ -87,5 +90,5 @@ vim.api.nvim_set_keymap('v', '<leader>ds', '<ESC>:lua require("dap-python").debu
 vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle, { desc = 'Toggle Undotree' })
 
 -- Bufferline Keymaps
-vim.keymap.set('n', '<C-[>', ':BufferLineCyclePrev<CR>', { silent = true, noremap = true, desc = 'Previous Buffer' })
+-- vim.keymap.set('n', '<C-[>', ':BufferLineCyclePrev<CR>', { silent = true, noremap = true, desc = 'Previous Buffer' })
 vim.keymap.set('n', '<C-]>', ':BufferLineCycleNext<CR>', { silent = true, desc = 'Next Buffer' })

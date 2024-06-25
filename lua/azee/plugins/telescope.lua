@@ -119,6 +119,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        live_grep_args = {
+          auto_quoting = false,
+        },
         -- frecency = {
         --   auto_validate = false,
         --   matcher = 'fuzzy',
@@ -139,6 +142,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     -- pcall(require('telescope').load_extension, 'frecency')
+    pcall(require('telescope').load_extension, 'git_worktree')
     pcall(require('telescope').load_extension, 'live_grep_args')
     pcall(require('telescope').load_extension, 'smart_open')
 
