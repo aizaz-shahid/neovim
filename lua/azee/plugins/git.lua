@@ -27,7 +27,7 @@ return {
     },
   },
   {
-    'Primeagen/git-worktree.nvim',
+    'ThePrimeagen/git-worktree.nvim',
     config = function()
       require('git-worktree').setup()
     end,

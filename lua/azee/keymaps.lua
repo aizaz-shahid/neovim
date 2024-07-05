@@ -1,6 +1,6 @@
 -- Utility Keymaps
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlights', noremap = true, silent = true })
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>/', ': CommentToggle<cr>', { desc = 'Toggle Comment' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<Leader>c', 'gc', { remap = true, desc = 'Toggle comment' })
 
 -- Indent with Tab in normal mode
 vim.api.nvim_set_keymap('n', '<Tab>', '>>', { noremap = true })
@@ -58,7 +58,6 @@ vim.keymap.set('n', '<leader>gs', ':Neogit<CR>', { desc = 'Git Status', silent =
 -- vim.keymap.set('n', '<leader>gp', ':Neogit pull<CR>', { silent = true, noremap = true })
 -- vim.keymap.set('n', '<leader>gP', ':Neogit push<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<leader>gb', ':Telescope git_branches<CR>', { desc = 'Git Branches', silent = true, noremap = true })
-# git-worktree keymaps
 vim.keymap.set('n', '<leader>gtl', ':lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', { desc = 'List Git Worktrees' })
 vim.keymap.set('n', '<leader>gtc', ':lua require("telescope").extensions.git_worktree.create_git_worktree()<CR>', { desc = 'Create Git Worktree' })
 
